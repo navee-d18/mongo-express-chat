@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>All Chats!</h2>
+    <form action="/chats/new" method="get">
+        <button style="height: 30px; border-radius: 10px; width: 120px; background-color: rgb(78, 235, 72);">New chat</button>
+        <br><br>
+    </form>
+    <% for (let chat of chats) { %>
+        <div class="chat">
+            <p>From : <i><b><%= chat.from %></b></i></p>
+            <div class="msg">
+                <p><%= chat.msg %></p>
+                <form action="/chats/<%= chat._id %>/edit" method="get">
+                    <button style="height: 30px; border-radius: 10px; width: 120px; background-color: rgb(59, 216, 244);">Edit your msg</button>
+                </form> 
+                <br>
+                <form action="/chats/<%= chat._id %>?_method=DELETE" method="post">
+                    <button style="height: 30px; border-radius: 10px; width: 120px; background-color: rgb(247, 13, 13); color: white;">Delete your msg</button>
+                </form>
+            </div>
+            <p>To : <i><b><%= chat.to %></b></i></p>
+            <hr>
+            <p> <b>Time : </b><%= chat.created_at.toString().split(" ")[4] %></p>
+            <p> <b>Date : </b><%= chat.created_at.toString().split(" ").slice(0,4).join("-") %></p>
+        </div>
+    <% } %>
+</body>
+</html>
